@@ -10,18 +10,17 @@ class Window(QtWidgets.QMainWindow):
 
     def initSignals(self):
         self.ui.tableWidget.setEnabled(True)
-
+        self.ui.tableWidget.setRowCount(0)
 
         self.ui.lineEdit.returnPressed.connect(self.get_text)
         self.ui.pushButton.setEnabled(True)
         self.ui.pushButton.clicked.connect(self.get_text)
         #self.ui.lineEdit.connect(self.lineEditChange)
-        #self.ui.textEdit.connect(self.onTextChanged)
-        #self.ui.timeEdit.connect(self.onTimeChanged)
-        #self.ui.dateTimeEdit.connect(self.onTimeChanged)
-
-    def lineEditChange(self):
-        self.ui.lineEdit.setText()
+        # #self.ui.textEdit.connect(self.onTextChanged)
+        # #self.ui.timeEdit.connect(self.onTimeChanged)
+        # #self.ui.dateTimeEdit.connect(self.onTimeChanged)
+        # def lineEditChange(self):
+        # self.ui.lineEdit.setText()
 
     def onTextChanged(self):
         self.ui.textEdit.setText()
@@ -33,7 +32,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui.dateTimeEdit.setDateTime()
 
     def get_text(self):
-        table = QtWidgets.QTableWidget(self)
+        table = self.ui.tableWidget
 
         heading = self.ui.lineEdit.text()
         note = self.ui.textEdit.toPlainText()
@@ -42,16 +41,17 @@ class Window(QtWidgets.QMainWindow):
 
         data = [heading, note, time, datetimee]
         table.setColumnCount(4)
-        table.setRowCount(len(data))
+        current_row = table.rowCount()
+        table.setRowCount(table.rowCount()+1)
 
 
-        table.setItem(0, 0, QtWidgets.QTableWidgetItem(str(data[0])))
-        table.setItem(0, 1, QtWidgets.QTableWidgetItem(str(data[1])))
-        table.setItem(0, 2, QtWidgets.QTableWidgetItem(str(data[2])))
-        table.setItem(0, 3, QtWidgets.QTableWidgetItem(str(data[3])))
+        table.setItem(current_row, 0, QtWidgets.QTableWidgetItem(str(data[0])))
+        table.setItem(current_row, 1, QtWidgets.QTableWidgetItem(str(data[1])))
+        table.setItem(current_row, 2, QtWidgets.QTableWidgetItem(str(data[2])))
+        table.setItem(current_row, 3, QtWidgets.QTableWidgetItem(str(data[3])))
 
         #table.resizeColumnsToContents()
-        print(data)
+        # print(data)
 
 
 
