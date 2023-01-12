@@ -15,12 +15,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui.lineEdit.returnPressed.connect(self.get_text)
         self.ui.pushButton.setEnabled(True)
         self.ui.pushButton.clicked.connect(self.get_text)
-        #self.ui.lineEdit.connect(self.lineEditChange)
-        # #self.ui.textEdit.connect(self.onTextChanged)
-        # #self.ui.timeEdit.connect(self.onTimeChanged)
-        # #self.ui.dateTimeEdit.connect(self.onTimeChanged)
-        # def lineEditChange(self):
-        # self.ui.lineEdit.setText()
+        self.ui.pushButton_2.clicked.connect(self.delete_row)
 
     def onTextChanged(self):
         self.ui.textEdit.setText()
@@ -52,6 +47,15 @@ class Window(QtWidgets.QMainWindow):
 
         #table.resizeColumnsToContents()
         # print(data)
+    def delete_row(self):
+        index_row = []
+        for i in self.ui.tableWidget.selectedIndexes():
+            index_row.append(i.row())
+        index_row = list(set(index_row))
+        for item in index_row:
+            if self.ui.tableWidget.rowCount() > 0:
+                self.ui.tableWidget.removeRow(item)
+
 
 
 

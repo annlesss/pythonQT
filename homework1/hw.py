@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from homework.homework1 import Ui_MainWindow
+from homework1.homework1 import Ui_MainWindow
 
 
 class Window(QtWidgets.QMainWindow):
